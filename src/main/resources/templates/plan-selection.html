@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Two Wheeler Insurance - Plans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: linear-gradient(to right, #74ebd5, #9face6);
+          display: flex;
+          min-height: 100vh;
+          animation: fadeIn 1s ease-in;
+          overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+          width: 260px;
+          background: rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(14px);
+          color: white;
+          padding: 30px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+          animation: slideInLeft 0.8s ease;
+        }
+
+        .sidebar h3 {
+          font-size: 22px;
+          margin-bottom: 15px;
+          letter-spacing: 1px;
+        }
+
+        .sidebar-item {
+          padding: 12px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          font-size: 16px;
+          transition: 0.3s;
+        }
+
+        .sidebar-item:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 30px;
+          animation: slideInRight 0.8s ease;
+          overflow-y: auto;
+        }
+
+        .container {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          border-radius: 20px;
+          padding: 30px;
+          max-width: 800px;
+          width: 100%;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+          animation: fadeInUp 1s ease-in-out;
+        }
+
+        h2.title {
+          color: #fff;
+          text-align: center;
+          margin-bottom: 30px;
+          font-size: 32px;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .plans-list {
+          max-height: 70vh;
+          overflow-y: auto;
+          padding-right: 5px;
+        }
+
+        .plan-card {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 16px;
+          padding: 15px 20px;
+          margin-bottom: 20px;
+          cursor: pointer;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          border-left: 6px solid #007bff;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .plan-card:hover {
+          transform: translateY(-5px) scale(1.01);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-info {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .plan-info img {
+          width: 48px;
+          height: 48px;
+          object-fit: contain;
+          border-radius: 8px;
+          background: #fff;
+          padding: 5px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          transition: transform 0.4s ease;
+        }
+
+        .plan-info:hover img {
+          transform: scale(1.1);
+        }
+
+        .plan-info h3 {
+          margin: 0;
+          font-size: 1.25rem;
+          color: #333;
+        }
+
+        .plan-info p {
+          font-size: 0.9rem;
+          color: #555;
+        }
+
+        .price-btn {
+          background: linear-gradient(45deg, #007bff, #0056d2);
+          color: white;
+          padding: 12px 25px;
+          border-radius: 30px;
+          border: none;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.4s, transform 0.3s, box-shadow 0.3s;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .price-btn:hover {
+          background: linear-gradient(45deg, #0056d2, #003f8a);
+          transform: scale(1.05);
+          box-shadow: 0 8px 20px rgba(0, 86, 210, 0.5);
+        }
+
+        .price-btn:active {
+          transform: scale(0.98);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+          from { transform: translateX(100px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Scrollbar styling */
+        .plans-list::-webkit-scrollbar {
+          width: 6px;
+        }
+        .plans-list::-webkit-scrollbar-track {
+          background: rgba(255,255,255,0.2);
+          border-radius: 3px;
+        }
+        .plans-list::-webkit-scrollbar-thumb {
+          background: rgba(0,123,255,0.6);
+          border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          body {
+            flex-direction: column;
+          }
+
+          .sidebar {
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+            padding: 15px;
+          }
+
+          .main-content {
+            padding: 20px;
+          }
+
+          .plan-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+          }
+
+          .plan-info {
+            margin-bottom: 10px;
+          }
+
+          .price-btn {
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h3>Car Info</h3>
+    <div class="sidebar-item">Reg: <span id="regInfo">-</span></div>
+    <div class="sidebar-item">Year: <span id="yearInfo">-</span></div>
+    <div class="sidebar-item">Brand: <span id="brandInfo">-</span></div>
+    <div class="sidebar-item">Model: <span id="modelInfo">-</span></div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <h2 class="title">Choose Your Insurance Plan</h2>
+
+        <div class="plans-list">
+            <!-- Each plan-card with logo, name, description, button -->
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=SBI" alt="SBI General">
+                    <div>
+                        <h3>SBI General Insurance</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('SBI')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=ICICI" alt="ICICI Lombard">
+                    <div>
+                        <h3>ICICI Lombard</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('ICICI')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=Reliance" alt="Reliance General">
+                    <div>
+                        <h3>Reliance General Insurance</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('Reliance')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=National" alt="National Insurance">
+                    <div>
+                        <h3>National Insurance</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('National')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=Royal" alt="Royal Sundaram">
+                    <div>
+                        <h3>Royal Sundaram</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('Royal Sundaram')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=Chola" alt="Chola MS">
+                    <div>
+                        <h3>Chola MS</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('Chola MS')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=NIA" alt="New India Assurance">
+                    <div>
+                        <h3>New India Assurance</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('New India Assurance')">BUY NOW ₹714</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-info">
+                    <img src="https://via.placeholder.com/48?text=UII" alt="United India Insurance">
+                    <div>
+                        <h3>United India Insurance</h3>
+                        <p>Third Party Plan • 1 Year</p>
+                    </div>
+                </div>
+                <button class="price-btn" onclick="goToPayment('United India Insurance')">BUY NOW ₹714</button>
+            </div>
+        </div> <!-- end plans-list -->
+
+    </div>
+</div>
+<script>
+    // Wait until DOM is fully loaded before manipulating it
+    document.addEventListener("DOMContentLoaded", function () {
+      // Safely retrieve and display vehicle info from localStorage
+      const fields = ["reg", "year", "brand", "model"];
+      fields.forEach(field => {
+        const element = document.getElementById(`${field}Info`);
+        if (element) {
+          const value = localStorage.getItem(field);
+          element.textContent = value ? value : "-";
+        }
+      });
+    });
+
+    // Handles redirection when "BUY NOW" is clicked
+    function goToPayment(company) {
+      if (!company) return;
+
+      // Store selected insurance company in localStorage
+      localStorage.setItem("selectedPlanCompany", company);
+
+      // Redirect to payment page (ensure the URL is correct in your app)
+      window.location.href = "/payment-page";
+    }
+</script>
+
+
+</body>
+</html>

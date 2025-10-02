@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Variant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+    }
+    html, body {
+      height: 100%;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #6b8dd6, #8e44ad);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(14px);
+      padding: 30px 25px;
+      box-shadow: 4px 0 25px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      animation: slideInLeft 1s ease forwards;
+      z-index: 10;
+    }
+    .sidebar h3 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      user-select: none;
+      margin-bottom: 20px;
+      color: #c8d1ff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+    .sidebar-item {
+      font-size: 16px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: inset 0 0 8px rgba(255,255,255,0.15);
+      color: #d1d9ff;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .sidebar-item:hover {
+      background: rgba(255,255,255,0.3);
+      box-shadow: inset 0 0 12px rgba(255,255,255,0.25);
+      cursor: default;
+    }
+    .sidebar-item span {
+      font-weight: 700;
+      color: #e0e7ff;
+    }
+
+    /* Main Container */
+    .container {
+      margin-left: 280px;
+      margin-right: 20px;
+      max-width: 520px;
+      height: calc(100vh - 60px);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 40px 35px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      animation: slideInUp 1s ease forwards;
+      color: white;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 40px;
+      letter-spacing: 0.04em;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    /* Options */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      flex-grow: 1;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .option-btn {
+      background: rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 20px 28px;
+      font-weight: 700;
+      font-size: 20px;
+      color: #dce4ff;
+      text-align: center;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      transition: background 0.35s ease, transform 0.35s cubic-bezier(.36,.07,.19,.97), box-shadow 0.35s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-btn:hover {
+      background: rgba(255,255,255,0.38);
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 0 20px 6px rgba(255,255,255,0.6);
+      z-index: 5;
+    }
+
+    /* Back Button */
+    .back-btn {
+      margin-top: 30px;
+      padding: 16px 28px;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      transition: background 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      user-select: none;
+      align-self: center;
+      max-width: 180px;
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.6);
+      transform: scale(1.07);
+      box-shadow: 0 0 20px 8px rgba(255,255,255,0.7);
+    }
+
+    /* Scrollbar styling for options */
+    .options::-webkit-scrollbar {
+      width: 8px;
+    }
+    .options::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .options::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+    }
+
+    /* Animations */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-130px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @keyframes slideInUp {
+      from {
+        transform: translateY(70px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .container {
+        margin-left: 20px;
+        margin-right: 20px;
+        height: auto;
+      }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 20px 15px;
+        box-shadow: none;
+        justify-content: space-around;
+        gap: 15px;
+      }
+      .sidebar h3 {
+        display: none;
+      }
+      .sidebar-item {
+        background: rgba(255,255,255,0.15);
+        border-radius: 12px;
+        font-size: 14px;
+        padding: 10px 14px;
+        font-weight: 600;
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.25);
+        color: #e6eaff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" role="complementary" aria-label="Car information sidebar">
+  <h3>Your Car Info</h3>
+  <div class="sidebar-item">Registration: <span id="regInfo">-</span></div>
+  <div class="sidebar-item">Year: <span id="yearInfo">-</span></div>
+  <div class="sidebar-item">Brand: <span id="brandInfo">-</span></div>
+  <div class="sidebar-item">Model: <span id="modelInfo">-</span></div>
+</aside>
+
+<main class="container" role="main" aria-labelledby="heading">
+  <h2 id="heading">Select Variant</h2>
+  <div class="options" tabindex="0" aria-live="polite" aria-atomic="true">
+    <div class="option-btn" onclick="selectVariant('Premium 7 STR')" role="button" tabindex="0" aria-label="Select Premium 7 STR variant">Premium 7 STR</div>
+    <div class="option-btn" onclick="selectVariant('Premium 8 STR')" role="button" tabindex="0" aria-label="Select Premium 8 STR variant">Premium 8 STR</div>
+    <div class="option-btn" onclick="selectVariant('Prestige 7 STR')" role="button" tabindex="0" aria-label="Select Prestige 7 STR variant">Prestige 7 STR</div>
+  </div>
+  <button class="back-btn" onclick="goBack()" aria-label="Go back to model selection">← Back</button>
+</main>
+
+<script>
+  // Load saved data into sidebar
+  document.getElementById("regInfo").textContent = localStorage.getItem("reg") || "-";
+  document.getElementById("yearInfo").textContent = localStorage.getItem("year") || "-";
+  document.getElementById("brandInfo").textContent = localStorage.getItem("brand") || "-";
+  document.getElementById("modelInfo").textContent = localStorage.getItem("model") || "-";
+
+  function selectVariant(variant) {
+    localStorage.setItem("variant", variant);
+    window.location.href = "/user_info"; // Update to your next page
+  }
+
+  function goBack() {
+    window.location.href = "/car_model_selection"; // Update to your previous page
+  }
+
+  // Allow keyboard "Enter" or "Space" on option buttons
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Select Car Model</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          display: flex;
+          height: 100vh;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          animation: gradientBG 12s ease infinite;
+          overflow: hidden;
+          color: #111;
+        }
+
+
+        /* Sidebar */
+        .sidebar {
+          width: 260px;
+          background: rgba(0,0,0,0.35);
+          backdrop-filter: blur(14px);
+          color: white;
+          padding: 30px 25px;
+          display: flex;
+          flex-direction: column;
+          gap: 22px;
+          box-shadow: 5px 0 25px rgba(0,0,0,0.25);
+          animation: slideInLeft 0.8s ease forwards;
+          position: relative;
+          z-index: 10;
+        }
+        .sidebar h3 {
+          font-size: 24px;
+          margin-bottom: 20px;
+          font-weight: 700;
+          text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+        .sidebar-item {
+          padding: 14px 18px;
+          background: rgba(255,255,255,0.15);
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 600;
+          transition: background 0.3s ease;
+        }
+        .sidebar-item span {
+          float: right;
+          font-weight: 700;
+          color: #ffdd59;
+        }
+
+        /* === Main Content === */
+        .main-content {
+          flex: 1;
+          overflow-y: auto;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 40px 30px;
+          animation: slideInRight 1s ease;
+          scrollbar-width: thin;
+          scrollbar-color: #764ba2 transparent;
+        }
+        /* Scrollbar styles */
+        .main-content::-webkit-scrollbar {
+          width: 8px;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+          background: #764ba2;
+          border-radius: 10px;
+        }
+        .main-content::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .container {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          border-radius: 24px;
+          padding: 35px 40px;
+          width: 100%;
+          max-width: 720px;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+          overflow-y: auto;
+          user-select: none;
+        }
+
+        h2.title {
+          color: #fff;
+          text-align: center;
+          margin-bottom: 40px;
+          font-size: 30px;
+          font-weight: 700;
+          text-shadow: 0 0 10px rgba(255 255 255 / 0.5);
+          letter-spacing: 1.2px;
+        }
+
+        .brand-section {
+          margin-bottom: 38px;
+          opacity: 0;
+          animation: fadeInUp 0.7s ease forwards;
+        }
+        .brand-section:nth-child(1) { animation-delay: 0.15s; }
+        .brand-section:nth-child(2) { animation-delay: 0.30s; }
+        .brand-section:nth-child(3) { animation-delay: 0.45s; }
+        .brand-section:nth-child(4) { animation-delay: 0.60s; }
+        .brand-section:nth-child(5) { animation-delay: 0.75s; }
+        .brand-section:nth-child(6) { animation-delay: 0.90s; }
+        .brand-section:nth-child(7) { animation-delay: 1.05s; }
+        .brand-section:nth-child(8) { animation-delay: 1.20s; }
+        .brand-section:nth-child(9) { animation-delay: 1.35s; }
+
+        .brand-title {
+          font-size: 22px;
+          color: #fff;
+          margin-bottom: 18px;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+          padding-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-weight: 700;
+          text-shadow: 0 0 8px rgba(255 255 255 / 0.7);
+        }
+
+        .brand-title img {
+          width: 30px;
+          height: 30px;
+          object-fit: contain;
+          animation: pulseLogo 3s ease-in-out infinite;
+          filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+          border-radius: 6px;
+          background: rgba(255 255 255 / 0.1);
+          padding: 2px;
+        }
+
+        .options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          user-select: none;
+        }
+
+        .option-btn {
+          flex: 1 1 calc(33.33% - 14px);
+          background: rgba(255, 255, 255, 0.25);
+          padding: 14px 0;
+          text-align: center;
+          border-radius: 16px;
+          font-weight: 700;
+          color: #222;
+          cursor: pointer;
+          transition:
+            background 0.35s ease,
+            transform 0.25s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+            box-shadow 0.35s ease;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+          user-select: none;
+          font-size: 16px;
+          letter-spacing: 0.04em;
+          box-shadow: 0 3px 8px rgb(0 0 0 / 0.12);
+        }
+
+        .option-btn:hover {
+          background: rgba(255, 255, 255, 0.45);
+          transform: translateY(-5px) scale(1.06);
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+          color: #000;
+        }
+
+        .option-btn:active {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.28);
+        }
+
+        .back-btn {
+          display: block;
+          margin: 30px auto 0;
+          background: rgba(255, 255, 255, 0.3);
+          border: none;
+          padding: 14px 28px;
+          border-radius: 14px;
+          font-size: 16px;
+          color: #111;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background 0.3s ease, transform 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          user-select: none;
+        }
+
+        .back-btn:hover {
+          background: rgba(255, 255, 255, 0.55);
+          transform: scale(1.08);
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+        }
+
+        /* === Animations === */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInLeft {
+          from {
+            transform: translateX(-120px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes pulseLogo {
+          0%, 100% {
+            transform: scale(1);
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
+          }
+          50% {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 6px rgba(255,255,255,1));
+          }
+        }
+
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+          body {
+            flex-direction: column;
+          }
+
+          .sidebar {
+            flex-direction: row;
+            width: 100%;
+            padding: 14px 10px;
+            justify-content: space-around;
+            font-size: 14px;
+            gap: 8px;
+          }
+
+          .main-content {
+            padding: 20px 18px;
+          }
+
+          .option-btn {
+            flex: 1 1 100%;
+          }
+
+          .container {
+            padding: 30px 20px;
+            max-width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" role="complementary" aria-label="Car Info Sidebar">
+    <h3>Car Info</h3>
+    <div class="sidebar-item">Reg: <span id="regInfo">-</span></div>
+    <div class="sidebar-item">Year: <span id="yearInfo">-</span></div>
+    <div class="sidebar-item">Brand: <span id="brandInfo">-</span></div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" role="main" aria-labelledby="pageTitle">
+    <div class="container">
+        <h2 id="pageTitle" class="title">Select Car Model</h2>
+
+        <!-- KIA -->
+        <div class="brand-section">
+            <div class="brand-title"><img src="https://img.icons8.com/color/48/kia.png" alt="KIA logo" /> KIA</div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('SELTOS')">SELTOS</div>
+                <div class="option-btn" onclick="selectModel('CARNIVAL')">CARNIVAL</div>
+                <div class="option-btn" onclick="selectModel('SONET')">SONET</div>
+            </div>
+        </div>
+
+        <!-- Hyundai -->
+        <div class="brand-section">
+            <div class="brand-title"><img src="https://img.icons8.com/color/48/hyundai.png" alt="Hyundai logo" /> Hyundai</div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('CRETA')">CRETA</div>
+                <div class="option-btn" onclick="selectModel('I20')">I20</div>
+                <div class="option-btn" onclick="selectModel('VERNA')">VERNA</div>
+            </div>
+        </div>
+
+        <!-- Tata -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://lezebre.lu/images/detailed/17/30038-tata-logo.png" alt="Tata Motors logo" width="24" height="24" />
+                Tata
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('NEXON')">NEXON</div>
+                <div class="option-btn" onclick="selectModel('HARRIER')">HARRIER</div>
+                <div class="option-btn" onclick="selectModel('PUNCH')">PUNCH</div>
+            </div>
+        </div>
+
+        <!-- Mahindra -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src=" https://images.seeklogo.com/logo-png/61/2/mahindra-auto-logo-png_seeklogo-613492.png"  alt="Mahindra logo" width="24" height="24" />
+                Mahindra
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('XUV700')">XUV700</div>
+                <div class="option-btn" onclick="selectModel('SCORPIO')">SCORPIO</div>
+                <div class="option-btn" onclick="selectModel('THAR')">THAR</div>
+            </div>
+        </div>
+
+        <!-- Skoda -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://c8.alamy.com/comp/2EJ4W4Y/logo-of-the-car-brand-skoda-free-space-on-white-background-2EJ4W4Y.jpg" alt="Skoda logo" width="24" height="24" />
+                Skoda
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('KUSHAQ')">KUSHAQ</div>
+                <div class="option-btn" onclick="selectModel('OCTAVIA')">OCTAVIA</div>
+                <div class="option-btn" onclick="selectModel('SUPERB')">SUPERB</div>
+            </div>
+        </div>
+
+        <!-- MG -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://i.pinimg.com/474x/e9/fc/52/e9fc52cf33f103403631a3a3fd281347.jpg" alt="MG logo" width="24" height="24" />
+                MG
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('ZS EV')">ZS EV</div>
+                <div class="option-btn" onclick="selectModel('HECTOR')">HECTOR</div>
+                <div class="option-btn" onclick="selectModel('ASTOR')">ASTOR</div>
+            </div>
+        </div>
+
+        <!-- Suzuki -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://img.icons8.com/color/48/suzuki.png" alt="Suzuki Logo" class="brand-logo" />
+                Suzuki
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('SWIFT')">SWIFT</div>
+                <div class="option-btn" onclick="selectModel('BALENO')">BALENO</div>
+                <div class="option-btn" onclick="selectModel('BREZZA')">BREZZA</div>
+            </div>
+        </div>
+
+        <!-- Honda -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://img.icons8.com/color/48/honda.png" alt="Honda Logo" class="brand-logo" />
+                Honda
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('CITY')">CITY</div>
+                <div class="option-btn" onclick="selectModel('WR-V')">WR-V</div>
+                <div class="option-btn" onclick="selectModel('AMAZE')">AMAZE</div>
+            </div>
+        </div>
+
+        <!-- Toyota -->
+        <div class="brand-section">
+            <div class="brand-title">
+                <img src="https://images.seeklogo.com/logo-png/48/1/toyota-logo-png_seeklogo-486469.png" alt="Toyota Logo" class="brand-logo" />
+                Toyota
+            </div>
+            <div class="options">
+                <div class="option-btn" onclick="selectModel('INNOVA')">INNOVA</div>
+                <div class="option-btn" onclick="selectModel('FORTUNER')">FORTUNER</div>
+                <div class="option-btn" onclick="selectModel('GLANZA')">GLANZA</div>
+            </div>
+        </div>
+
+        <button class="back-btn" onclick="goBack()">← Back</button>
+    </div>
+</div>
+
+<script>
+    // Display saved info from localStorage or fallback to "-"
+    document.getElementById("regInfo").textContent = localStorage.getItem("reg") || "-";
+    document.getElementById("yearInfo").textContent = localStorage.getItem("year") || "-";
+    document.getElementById("brandInfo").textContent = localStorage.getItem("brand") || "-";
+
+    function selectModel(model) {
+      localStorage.setItem("model", model);
+      // Redirect to variant selection page
+      window.location.href = "/variant_selection";
+    }
+
+    function goBack() {
+      window.location.href = "/car_brand_selection";
+    }
+</script>
+
+</body>
+</html>

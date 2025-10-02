@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Car Insurance - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+            rel="stylesheet"
+    />
+    <style>
+        body {
+          background: linear-gradient(to right, #0d6efd, #6c757d);
+          margin: 0;
+          height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          display: flex;
+          flex-direction: column;
+          overflow-x: hidden;
+        }
+
+        /* ===== Navbar ===== */
+        nav {
+          background-color: #0d6efd;
+          box-shadow: 0 4px 10px rgba(13, 110, 253, 0.5);
+          padding: 0.5rem 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: white;
+          font-weight: 600;
+          font-size: 1.25rem;
+          user-select: none;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        nav .brand {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+        nav .nav-links {
+          display: flex;
+          gap: 24px;
+          font-size: 1rem;
+        }
+        nav .nav-links a {
+          color: white;
+          text-decoration: none;
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+          color: #ffc107;
+        }
+        nav .nav-links a::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 100%;
+          height: 2px;
+          background: #ffc107;
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+          transform-origin: right;
+        }
+        nav .nav-links a:hover::after,
+        nav .nav-links a.active::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+
+        .login-card {
+          width: 100%;
+          max-width: 420px;
+          background: #fff;
+          border-radius: 12px;
+          padding: 2.5rem 2rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          animation: fadeInScale 0.7s ease forwards;
+          margin: auto;
+          margin-top: 3rem;
+          position: relative;
+          z-index: 10;
+        }
+
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .brand-icon {
+          font-size: 3rem;
+          color: #0d6efd;
+          animation: bounceIcon 2s infinite;
+          user-select: none;
+        }
+
+        @keyframes bounceIcon {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .form-label {
+          font-weight: 600;
+          letter-spacing: 0.03em;
+        }
+
+        .input-group-text i {
+          color: #0d6efd;
+          animation: pulseIcon 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseIcon {
+          0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.7;
+            transform: scale(1.1);
+          }
+        }
+
+        .form-control:focus {
+          box-shadow: 0 0 8px #0d6efdaa;
+          border-color: #0d6efd;
+        }
+
+        .login-btn {
+          background-color: #0d6efd;
+          border: none;
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+        }
+
+        .login-btn:hover,
+        .login-btn:focus {
+          background-color: #0b5ed7;
+          transform: scale(1.05);
+          box-shadow: 0 6px 18px rgba(11, 94, 215, 0.6);
+          outline: none;
+        }
+
+        main {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        footer {
+          text-align: center;
+          color: #eee;
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          user-select: none;
+          background: rgba(0,0,0,0.1);
+          box-shadow: inset 0 1px 3px rgba(255,255,255,0.2);
+        }
+
+        .text-center a {
+          color: #0d6efd;
+          font-weight: 600;
+          transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+          color: #0a58ca;
+          text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+          .login-card {
+            padding: 2rem 1.5rem;
+            margin-top: 2rem;
+          }
+          nav {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+          }
+          nav .nav-links {
+            gap: 14px;
+          }
+        }
+    </style>
+</head>
+<body>
+<nav>
+
+    <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-car-front-fill fs-4"></i>
+        <div class="brand">Car Insurance</div>
+    </div>
+    <div class="nav-links">
+        <a href="/" >Home</a>
+        <a href="/login" class="active">Login</a>
+        <a href="/register">Register</a>
+    </div>
+</nav>
+
+<main>
+    <div class="login-card shadow">
+        <div class="text-center mb-4">
+            <div class="brand-icon mb-2">
+                <i class="bi bi-car-front-fill"></i>
+            </div>
+            <h3 class="mb-0">Car Insurance Login</h3>
+            <small class="text-muted">Access your dashboard</small>
+        </div>
+
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            required
+                            placeholder="Enter username"
+                    />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            required
+                            placeholder="Enter password"
+                    />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary login-btn w-100 mt-3">
+                Login
+            </button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p class="mb-0">
+                Don’t have an account?
+                <a href="/register" class="text-decoration-none">Register</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 Car Insurance
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("loginForm");
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!name || !password) {
+          alert("⚠️ Please fill in all fields.");
+          return;
+        }
+
+        try {
+          const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, password }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+
+            // Optional: Store token or user info
+            localStorage.setItem("name", data.name || name);
+
+            // Redirect to dashboard
+            window.location.href = "/car_details"; // Change as needed
+          } else if (response.status === 401) {
+            alert("❌ Invalid credentials!");
+          } else {
+            alert("❌ Login failed. Please try again.");
+          }
+        } catch (error) {
+          alert("❌ Server error! Please try again later.");
+          console.error("Login error:", error);
+        }
+      });
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Car Policy - Home</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+            rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-p7xmL+R6VWJQlLp53MwYxVUL0MyD94ZPYSh0Aw6oO8rZbU9+g4BB7Q+fR9eR9iOz7LcOD0PmGoa1BwfsTA4iIQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+
+    <style>
+        /* ===== Reset & Global Styles ===== */
+        * {
+          box-sizing: border-box;
+        }
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(to right, #0d6efd, #6c757d);
+          overflow-x: hidden;
+          color: #fff;
+        }
+
+        /* ===== Navbar ===== */
+        nav {
+          background-color: #0d6efd;
+          box-shadow: 0 4px 10px rgba(13, 110, 253, 0.5);
+          padding: 0.5rem 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: white;
+          font-weight: 600;
+          font-size: 1.25rem;
+          user-select: none;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        nav .brand {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+        nav .nav-links {
+          display: flex;
+          gap: 24px;
+          font-size: 1rem;
+        }
+        nav .nav-links a {
+          color: white;
+          text-decoration: none;
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+          color: #ffc107;
+        }
+        nav .nav-links a::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 100%;
+          height: 2px;
+          background: #ffc107;
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+          transform-origin: right;
+        }
+        nav .nav-links a:hover::after,
+        nav .nav-links a.active::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+
+        /* ===== Hero Section ===== */
+        .main-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: calc(100vh - 80px);
+          padding: 40px 20px;
+          position: relative;
+          text-align: center;
+        }
+
+        .card {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: 50px 40px;
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+          max-width: 480px;
+          width: 100%;
+          animation: fadeInUp 1s ease forwards;
+          z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 20px;
+          color: #fff;
+        }
+
+        p {
+          font-size: 1.2rem;
+          color: #e0e0e0;
+          margin-bottom: 30px;
+        }
+
+        .fa-car-side {
+          font-size: 3rem;
+          margin-bottom: 20px;
+          color: #ffc107;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.75; }
+        }
+
+        /* ===== Buttons ===== */
+        .btn-custom {
+          font-size: 1.1rem;
+          font-weight: 600;
+          padding: 14px 24px;
+          border-radius: 10px;
+          letter-spacing: 1px;
+          transition: all 0.3s ease;
+        }
+        .btn-primary {
+          background-color: #ffc107;
+          color: #0d6efd;
+          border: none;
+          width: 100%;
+        }
+        .btn-primary:hover {
+          background-color: #e6b800;
+          color: #003e8a;
+          box-shadow: 0 6px 18px rgba(255, 193, 7, 0.6);
+        }
+
+        /* ===== Background Shapes ===== */
+        .bg-shape {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(150px);
+          opacity: 0.3;
+          z-index: 0;
+          animation: float 8s ease-in-out infinite;
+        }
+        .shape1 {
+          width: 350px;
+          height: 350px;
+          background: #ffc107;
+          top: -100px;
+          left: -100px;
+          animation-delay: 0s;
+        }
+        .shape2 {
+          width: 450px;
+          height: 450px;
+          background: #0dcaf0;
+          bottom: -150px;
+          right: -150px;
+          animation-delay: 4s;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(20px) translateX(15px); }
+        }
+
+        /* ===== Footer ===== */
+        footer {
+          text-align: center;
+          padding: 1rem;
+          font-size: 0.9rem;
+          background: rgba(0, 0, 0, 0.1);
+          color: #fff;
+          box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 576px) {
+          h1 {
+            font-size: 2rem;
+          }
+          .card {
+            padding: 40px 25px;
+          }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav>
+    <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-car-front-fill fs-4"></i>
+        <div class="brand">Car Insurance</div>
+    </div>
+    <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+</nav>
+
+<!-- Background Shapes -->
+<div class="bg-shape shape1"></div>
+<div class="bg-shape shape2"></div>
+
+<!-- Main Section -->
+<div class="main-wrapper">
+    <div class="card">
+        <i class="fas fa-car-side"></i>
+        <h1>Welcome to Car Policy</h1>
+        <p>Manage your car policies and insurance securely and efficiently with ease.</p>
+        <a href="/register" class="btn btn-primary btn-custom">Get Started</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Car Insurance
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

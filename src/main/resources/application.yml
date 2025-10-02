@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: cars-insurence
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/car-insurence?createDatabaseIfNotExist=true
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8081
+
+
+
+
