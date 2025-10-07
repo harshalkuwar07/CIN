@@ -7,254 +7,257 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     /* Reset */
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Poppins', sans-serif;
-      user-select: none;
-    }
-    body, html {
-      height: 100%;
-      background: linear-gradient(-45deg, #667eea, #764ba2, #6b8dd6, #8e44ad);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: white;
-      overflow: hidden;
-    }
+ * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: 'Poppins', sans-serif;
+   user-select: none;
+ }
+ body, html {
+   height: 100%;
+   background: linear-gradient(-45deg, #667eea, #764ba2, #6b8dd6, #8e44ad);
+   background-size: 400% 400%;
+   animation: gradientBG 15s ease infinite;
+   color: black; /* Changed from white */
+   overflow: hidden;
+ }
 
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0; left: 0;
-      width: 260px;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(14px);
-      padding: 30px 25px;
-      box-shadow: 4px 0 25px rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      animation: slideInLeft 1s ease forwards;
-      z-index: 10;
-    }
-    .sidebar h3 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      user-select: none;
-      margin-bottom: 20px;
-      color: #c8d1ff;
-      text-shadow: 0 0 8px rgba(255,255,255,0.2);
-    }
-    .sidebar-item {
-      font-size: 16px;
-      background: rgba(255,255,255,0.12);
-      border-radius: 14px;
-      padding: 14px 18px;
-      box-shadow: inset 0 0 8px rgba(255,255,255,0.15);
-      color: #d1d9ff;
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      user-select: none;
-      transition: background 0.3s ease;
-    }
-    .sidebar-item:hover {
-      background: rgba(255,255,255,0.3);
-      box-shadow: inset 0 0 12px rgba(255,255,255,0.25);
-      cursor: default;
-    }
-    .sidebar-item span {
-      font-weight: 700;
-      color: #e0e7ff;
-    }
+ /* Sidebar */
+ .sidebar {
+   position: fixed;
+   top: 0; left: 0;
+   width: 260px;
+   height: 100%;
+   background: rgba(0,0,0,0.3);
+   backdrop-filter: blur(14px);
+   padding: 30px 25px;
+   box-shadow: 4px 0 25px rgba(0,0,0,0.5);
+   display: flex;
+   flex-direction: column;
+   gap: 25px;
+   animation: slideInLeft 1s ease forwards;
+   z-index: 10;
+ }
+ .sidebar h3 {
+   font-size: 22px;
+   font-weight: 600;
+   letter-spacing: 0.04em;
+   user-select: none;
+   margin-bottom: 20px;
+   color: black; /* Changed from #c8d1ff */
+   text-shadow: none;
+ }
+ .sidebar-item {
+   font-size: 16px;
+   background: rgba(255,255,255,0.12);
+   border-radius: 14px;
+   padding: 14px 18px;
+   box-shadow: inset 0 0 8px rgba(255,255,255,0.15);
+   color: black; /* Changed from #d1d9ff */
+   display: flex;
+   justify-content: space-between;
+   font-weight: 600;
+   user-select: none;
+   transition: background 0.3s ease;
+ }
+ .sidebar-item:hover {
+   background: rgba(255,255,255,0.3);
+   box-shadow: inset 0 0 12px rgba(255,255,255,0.25);
+   cursor: default;
+ }
+ .sidebar-item span {
+   font-weight: 700;
+   color: black; /* Changed from #e0e7ff */
+ }
 
-    /* Main container */
-    .container {
-      margin-left: 280px;
-      max-width: 460px;
-      width: 100%;
-      height: calc(100vh - 60px);
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 40px 35px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-      display: flex;
-      flex-direction: column;
-      animation: slideInUp 1s ease forwards;
-      color: white;
-      overflow-y: auto;
-      user-select: text;
-    }
+ /* Main container */
+ .container {
+   margin-left: 280px;
+   max-width: 460px;
+   width: 100%;
+   height: calc(100vh - 60px);
+   background: rgba(255,255,255,0.15);
+   backdrop-filter: blur(12px);
+   border-radius: 24px;
+   padding: 40px 35px;
+   box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+   display: flex;
+   flex-direction: column;
+   animation: slideInUp 1s ease forwards;
+   color: black; /* Changed from white */
+   overflow-y: auto;
+   user-select: text;
+ }
 
-    h2 {
-      font-weight: 700;
-      font-size: 28px;
-      margin-bottom: 32px;
-      letter-spacing: 0.04em;
-      text-align: center;
-      text-shadow: 0 0 10px rgba(255,255,255,0.3);
-      user-select: none;
-    }
+ h2 {
+   font-weight: 700;
+   font-size: 28px;
+   margin-bottom: 32px;
+   letter-spacing: 0.04em;
+   text-align: center;
+   text-shadow: none; /* Removed white glow */
+   color: black; /* Explicit */
+   user-select: none;
+ }
 
-    /* Summary card */
-    .summary {
-      background: rgba(255,255,255,0.18);
-      border-radius: 18px;
-      padding: 22px 28px;
-      margin-bottom: 30px;
-      box-shadow: inset 0 0 15px rgba(255,255,255,0.2);
-      font-size: 16px;
-      line-height: 1.5;
-      color: #d1d5db;
-      user-select: text;
-    }
-    .summary p {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding: 10px 0;
-      transition: background 0.3s ease;
-      cursor: default;
-      user-select: text;
-    }
-    .summary p:last-child {
-      border-bottom: none;
-    }
-    .summary p:hover {
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-    }
-    .summary strong {
-      color: #e0e7ff;
-      user-select: none;
-    }
+ /* Summary card */
+ .summary {
+   background: rgba(255,255,255,0.18);
+   border-radius: 18px;
+   padding: 22px 28px;
+   margin-bottom: 30px;
+   box-shadow: inset 0 0 15px rgba(255,255,255,0.2);
+   font-size: 16px;
+   line-height: 1.5;
+   color: black; /* Changed from #d1d5db */
+   user-select: text;
+ }
+ .summary p {
+   display: flex;
+   justify-content: space-between;
+   font-weight: 600;
+   letter-spacing: 0.02em;
+   border-bottom: 1px solid rgba(0,0,0,0.2); /* Darker line */
+   padding: 10px 0;
+   transition: background 0.3s ease;
+   cursor: default;
+   user-select: text;
+ }
+ .summary p:last-child {
+   border-bottom: none;
+ }
+ .summary p:hover {
+   background: rgba(0,0,0,0.05); /* Light black hover */
+   border-radius: 12px;
+ }
+ .summary strong {
+   color: black; /* Changed from #e0e7ff */
+   user-select: none;
+ }
 
-    /* Inputs */
-    input {
-      width: 100%;
-      padding: 14px 18px;
-      margin: 14px 0;
-      border-radius: 16px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      outline: none;
-      color: #1f2937; /* dark text */
-      background: white;
-      box-shadow: 0 3px 12px rgba(59,130,246,0.3);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      user-select: text;
-    }
-    input::placeholder {
-      font-weight: 500;
-      color: #9ca3af;
-    }
-    input:focus {
-      box-shadow: 0 0 16px #3b82f6;
-      transform: scale(1.04);
-    }
+ /* Inputs */
+ input {
+   width: 100%;
+   padding: 14px 18px;
+   margin: 14px 0;
+   border-radius: 16px;
+   border: none;
+   font-size: 16px;
+   font-weight: 600;
+   outline: none;
+   color: black;
+   background: white; /* Changed from black */
+   box-shadow: 0 3px 12px rgba(59,130,246,0.3);
+   transition: box-shadow 0.3s ease, transform 0.3s ease;
+   user-select: text;
+ }
+ input::placeholder {
+   font-weight: 500;
+   color: #6b7280; /* darker placeholder for contrast */
+ }
+ input:focus {
+   box-shadow: 0 0 16px #3b82f6;
+   transform: scale(1.04);
+ }
 
-    /* Submit button */
-    .primary-btn {
-      width: 100%;
-      background: #3b82f6;
-      color: black;
-      padding: 18px 0;
-      border: none;
-      border-radius: 20px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 18px;
-      box-shadow: 0 8px 28px rgba(59,130,246,0.65);
-      transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
-      user-select: none;
-    }
-    .primary-btn:hover {
-      background: #2563eb;
-      transform: scale(1.06);
-      box-shadow: 0 10px 36px rgba(37,99,235,0.9);
-    }
-    .primary-btn:active {
-      transform: scale(0.98);
-      box-shadow: 0 5px 18px rgba(37,99,235,0.7);
-    }
+ /* Submit button */
+ .primary-btn {
+   width: 100%;
+   background: #3b82f6;
+   color: black;
+   padding: 18px 0;
+   border: none;
+   border-radius: 20px;
+   font-size: 18px;
+   font-weight: 700;
+   cursor: pointer;
+   margin-top: 18px;
+   box-shadow: 0 8px 28px rgba(59,130,246,0.65);
+   transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+   user-select: none;
+ }
+ .primary-btn:hover {
+   background: #2563eb;
+   transform: scale(1.06);
+   box-shadow: 0 10px 36px rgba(37,99,235,0.9);
+ }
+ .primary-btn:active {
+   transform: scale(0.98);
+   box-shadow: 0 5px 18px rgba(37,99,235,0.7);
+ }
 
-    /* Scrollbar for container */
-    .container::-webkit-scrollbar {
-      width: 8px;
-    }
-    .container::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .container::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.25);
-      border-radius: 20px;
-    }
+ /* Scrollbar for container */
+ .container::-webkit-scrollbar {
+   width: 8px;
+ }
+ .container::-webkit-scrollbar-track {
+   background: transparent;
+ }
+ .container::-webkit-scrollbar-thumb {
+   background: rgba(0,0,0,0.25); /* Dark scrollbar for black text theme */
+   border-radius: 20px;
+ }
 
-    /* Animations */
-    @keyframes slideInLeft {
-      from {
-        transform: translateX(-130px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-    @keyframes slideInUp {
-      from {
-        transform: translateY(70px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+ /* Animations */
+ @keyframes slideInLeft {
+   from {
+     transform: translateX(-130px);
+     opacity: 0;
+   }
+   to {
+     transform: translateX(0);
+     opacity: 1;
+   }
+ }
+ @keyframes slideInUp {
+   from {
+     transform: translateY(70px);
+     opacity: 0;
+   }
+   to {
+     transform: translateY(0);
+     opacity: 1;
+   }
+ }
+ @keyframes gradientBG {
+   0% { background-position: 0% 50%; }
+   50% { background-position: 100% 50%; }
+   100% { background-position: 0% 50%; }
+ }
 
-    /* Responsive */
-    @media (max-width: 700px) {
-      .container {
-        margin-left: 20px;
-        margin-right: 20px;
-        height: auto;
-        max-width: none;
-      }
-      .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        padding: 20px 15px;
-        box-shadow: none;
-        justify-content: space-around;
-        gap: 15px;
-      }
-      .sidebar h3 {
-        display: none;
-      }
-      .sidebar-item {
-        background: rgba(255,255,255,0.15);
-        border-radius: 12px;
-        font-size: 14px;
-        padding: 10px 14px;
-        font-weight: 600;
-        box-shadow: inset 0 0 10px rgba(255,255,255,0.25);
-        color: #e6eaff;
-      }
-    }
+ /* Responsive */
+ @media (max-width: 700px) {
+   .container {
+     margin-left: 20px;
+     margin-right: 20px;
+     height: auto;
+     max-width: none;
+   }
+   .sidebar {
+     position: relative;
+     width: 100%;
+     height: auto;
+     flex-direction: row;
+     padding: 20px 15px;
+     box-shadow: none;
+     justify-content: space-around;
+     gap: 15px;
+   }
+   .sidebar h3 {
+     display: none;
+   }
+   .sidebar-item {
+     background: rgba(255,255,255,0.15);
+     border-radius: 12px;
+     font-size: 14px;
+     padding: 10px 14px;
+     font-weight: 600;
+     box-shadow: inset 0 0 10px rgba(255,255,255,0.25);
+     color: black; /* Changed */
+   }
+ }
+
   </style>
 </head>
 <body>
@@ -285,8 +288,9 @@
   <button class="primary-btn" onclick="submitForm()" aria-label="View Prices and Submit">View Prices</button>
 </main>
 
+
 <script>
-  // Load stored values
+  // Load values from localStorage
   const fallback = '-';
   const reg = localStorage.getItem("reg") || fallback;
   const year = localStorage.getItem("year") || fallback;
@@ -294,20 +298,20 @@
   const model = localStorage.getItem("model") || fallback;
   const variant = localStorage.getItem("variant") || fallback;
 
-  // Set summary text
+  // Populate UI
   document.getElementById("reg").textContent = reg;
   document.getElementById("year").textContent = year;
   document.getElementById("brand").textContent = brand;
   document.getElementById("model").textContent = model;
   document.getElementById("variant").textContent = variant;
 
-  // Set sidebar info too
   document.getElementById("regInfo").textContent = reg;
   document.getElementById("yearInfo").textContent = year;
   document.getElementById("brandInfo").textContent = brand;
   document.getElementById("modelInfo").textContent = model;
   document.getElementById("variantInfo").textContent = variant;
 
+  // Submit form
   function submitForm() {
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
@@ -317,17 +321,48 @@
       document.getElementById("name").focus();
       return;
     }
+
     if (!phone.match(/^\d{10}$/)) {
       alert("Please enter a valid 10-digit phone number.");
       document.getElementById("phone").focus();
       return;
     }
 
-    alert(`Submitted! Thank you, ${name}.\nWe will contact you shortly.`);
-    // Your submission logic here, then navigate:
-    window.location.href = "/plan-selection";
+    const payload = {
+      name,
+      phone,
+      registration: reg,
+      year,
+      brand,
+      model,
+      variant
+    };
+
+    fetch("http://localhost:8081/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Submission failed");
+      }
+      return res.text();
+    })
+    .then(message => {
+      alert(`Submitted! Thank you, ${name}.\nWe will contact you shortly.`);
+      window.location.href = "/plan-selection";
+    })
+    .catch(error => {
+      console.error("Submission error:", error);
+      alert("There was a problem submitting the form. Please try again.");
+    });
   }
 </script>
+
+
 
 </body>
 </html>

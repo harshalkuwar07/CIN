@@ -3,110 +3,85 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Two Wheeler Insurance - Plans</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Select Insurance Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <style>
         * {
+          box-sizing: border-box;
           margin: 0;
           padding: 0;
-          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+          user-select: none;
         }
 
-        body {
-          font-family: 'Poppins', sans-serif;
-          background: linear-gradient(to right, #74ebd5, #9face6);
-          display: flex;
-          min-height: 100vh;
-          animation: fadeIn 1s ease-in;
+        html, body {
+          height: 100%;
+          background: linear-gradient(-45deg, #667eea, #764ba2, #6b8dd6, #8e44ad);
+          background-size: 400% 400%;
+          animation: gradientBG 15s ease infinite;
+          color: black;
           overflow: hidden;
         }
 
-        /* Sidebar */
-        .sidebar {
-          width: 260px;
-          background: rgba(0, 0, 0, 0.25);
-          backdrop-filter: blur(14px);
-          color: white;
-          padding: 30px 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
-          animation: slideInLeft 0.8s ease;
-        }
-
-        .sidebar h3 {
-          font-size: 22px;
-          margin-bottom: 15px;
-          letter-spacing: 1px;
-        }
-
-        .sidebar-item {
-          padding: 12px 16px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          font-size: 16px;
-          transition: 0.3s;
-        }
-
-        .sidebar-item:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main Content */
+        /* Centering the main content next to sidebar */
         .main-content {
-          flex: 1;
+          margin-left: 280px;
           display: flex;
           justify-content: center;
-          align-items: flex-start;
-          padding: 30px;
-          animation: slideInRight 0.8s ease;
-          overflow-y: auto;
+          align-items: center;
+          height: 100vh;
+          padding-right: 20px;
         }
 
         .container {
+          max-width: 1000px;
+          height: auto;
+          max-height: 90vh;
           background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(12px);
-          border-radius: 20px;
-          padding: 30px;
-          max-width: 800px;
-          width: 100%;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-          animation: fadeInUp 1s ease-in-out;
+          border-radius: 34px;
+          padding: 40px 35px;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+          display: flex;
+          flex-direction: column;
+          animation: slideInUp 1s ease forwards;
+          overflow-y: auto;
         }
 
-        h2.title {
-          color: #fff;
-          text-align: center;
+        h2 {
+          font-weight: 700;
+          font-size: 28px;
           margin-bottom: 30px;
-          font-size: 32px;
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+          letter-spacing: 0.04em;
+          text-align: center;
+          text-shadow: 0 0 10px rgba(255,255,255,0.3);
+          color: black;
         }
 
         .plans-list {
-          max-height: 70vh;
+          display: flex;
+          flex-direction: column;
+          gap: 22px;
+          flex-grow: 1;
           overflow-y: auto;
-          padding-right: 5px;
+          padding-right: 8px;
         }
 
         .plan-card {
+          background: rgba(255,255,255,0.88);
+          border-radius: 20px;
+          padding: 20px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 16px;
-          padding: 15px 20px;
-          margin-bottom: 20px;
+          box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
           cursor: pointer;
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
-          border-left: 6px solid #007bff;
-          position: relative;
-          overflow: hidden;
         }
 
         .plan-card:hover {
-          transform: translateY(-5px) scale(1.01);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+          transform: scale(1.03);
+          box-shadow: 0 0 20px 6px rgba(255,255,255,0.5);
         }
 
         .plan-info {
@@ -119,21 +94,16 @@
           width: 48px;
           height: 48px;
           object-fit: contain;
-          border-radius: 8px;
-          background: #fff;
-          padding: 5px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-          transition: transform 0.4s ease;
-        }
-
-        .plan-info:hover img {
-          transform: scale(1.1);
+          background: white;
+          border-radius: 10px;
+          padding: 6px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .plan-info h3 {
           margin: 0;
-          font-size: 1.25rem;
-          color: #333;
+          font-size: 1.1rem;
+          color: #222;
         }
 
         .plan-info p {
@@ -142,87 +112,81 @@
         }
 
         .price-btn {
-          background: linear-gradient(45deg, #007bff, #0056d2);
-          color: white;
-          padding: 12px 25px;
+         background: linear-gradient(45deg, #87CEEB, #00BFFF); /* Sky Blue gradient */
           border-radius: 30px;
-          border: none;
-          font-size: 1.1rem;
+          padding: 12px 22px;
           font-weight: 600;
+          font-size: 16px;
+          border: none;
           cursor: pointer;
-          transition: background 0.4s, transform 0.3s, box-shadow 0.3s;
-          text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+          color: black;
+          box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
 
         .price-btn:hover {
-          background: linear-gradient(45deg, #0056d2, #003f8a);
+         background: rgba(255,255,255,0.7);
           transform: scale(1.05);
-          box-shadow: 0 8px 20px rgba(0, 86, 210, 0.5);
-        }
-
-        .price-btn:active {
-          transform: scale(0.98);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInLeft {
-          from { transform: translateX(-100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInRight {
-          from { transform: translateX(100px); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
+          box-shadow: 0 0 20px 8px rgba(255,255,255,0.6);
         }
 
         /* Scrollbar styling */
         .plans-list::-webkit-scrollbar {
-          width: 6px;
-        }
-        .plans-list::-webkit-scrollbar-track {
-          background: rgba(255,255,255,0.2);
-          border-radius: 3px;
+          width: 10px;
         }
         .plans-list::-webkit-scrollbar-thumb {
-          background: rgba(0,123,255,0.6);
-          border-radius: 3px;
+          background: rgba(255,255,255,0.25);
+          border-radius: 20px;
+        }
+
+        /* Animations */
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        @keyframes slideInLeft {
+          from { transform: translateX(-130px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+          from { transform: translateY(70px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-          body {
-            flex-direction: column;
-          }
-
           .sidebar {
+            position: relative;
+            width: 300%;
+            height: auto;
             flex-direction: row;
-            width: 100%;
             justify-content: space-around;
             padding: 15px;
           }
 
+          .sidebar h3 {
+            display: none;
+          }
+
           .main-content {
+            margin-left: 0;
+            height: auto;
             padding: 20px;
+          }
+
+          .container {
+            margin: 0;
+            max-height: none;
+            height: auto;
           }
 
           .plan-card {
             flex-direction: column;
             align-items: flex-start;
-            padding: 20px;
-          }
-
-          .plan-info {
-            margin-bottom: 10px;
+            gap: 15px;
           }
 
           .price-btn {
@@ -230,19 +194,9 @@
             text-align: center;
           }
         }
-
     </style>
 </head>
 <body>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <h3>Car Info</h3>
-    <div class="sidebar-item">Reg: <span id="regInfo">-</span></div>
-    <div class="sidebar-item">Year: <span id="yearInfo">-</span></div>
-    <div class="sidebar-item">Brand: <span id="brandInfo">-</span></div>
-    <div class="sidebar-item">Model: <span id="modelInfo">-</span></div>
-</div>
 
 <!-- Main Content -->
 <div class="main-content">
@@ -253,7 +207,7 @@
             <!-- Each plan-card with logo, name, description, button -->
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=SBI" alt="SBI General">
+                    <img src="https://pnghdpro.com/wp-content/themes/pnghdpro/download/social-media-and-brands/sbi-general-insurance-logo.png" alt="SBI General">
                     <div>
                         <h3>SBI General Insurance</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -264,7 +218,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=ICICI" alt="ICICI Lombard">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTASn4kn9vcC7ckiL6e8rr0yqeU5u3DKo5Gug&s" alt="ICICI Lombard">
                     <div>
                         <h3>ICICI Lombard</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -275,7 +229,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=Reliance" alt="Reliance General">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdmp28OoDJPlAHIhE0grKTMzlrpI-qEnGRhCz2-8WZ25rwfXeVp8WB7qK1AyAwpVhUcjo&usqp=CAU" alt="Reliance General">
                     <div>
                         <h3>Reliance General Insurance</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -286,7 +240,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=National" alt="National Insurance">
+                    <img src="https://e7.pngegg.com/pngimages/959/673/png-clipart-national-insurance-company-vehicle-insurance-general-insurance-corporation-of-india-others-miscellaneous-blue.png" alt="National Insurance">
                     <div>
                         <h3>National Insurance</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -297,7 +251,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=Royal" alt="Royal Sundaram">
+                    <img src="https://cdn.policyx.com/cms-media/royal-sundaram-health-insurance-logo-web178-1728991123.webp" alt="Royal Sundaram">
                     <div>
                         <h3>Royal Sundaram</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -308,7 +262,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=Chola" alt="Chola MS">
+                    <img src="https://w7.pngwing.com/pngs/182/584/png-transparent-cholamandalam-ms-general-insurance-health-insurance-business-third-party-administrator-business-text-people-logo.png" alt="Chola MS">
                     <div>
                         <h3>Chola MS</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -319,7 +273,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=NIA" alt="New India Assurance">
+                    <img src="https://vectorseek.com/wp-content/uploads/2024/02/New-India-Assurance-Logo-Vector.svg-.png" alt="New India Assurance">
                     <div>
                         <h3>New India Assurance</h3>
                         <p>Third Party Plan • 1 Year</p>
@@ -330,7 +284,7 @@
 
             <div class="plan-card">
                 <div class="plan-info">
-                    <img src="https://via.placeholder.com/48?text=UII" alt="United India Insurance">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/United_India_Insurance.svg/1280px-United_India_Insurance.svg.png" alt="United India Insurance">
                     <div>
                         <h3>United India Insurance</h3>
                         <p>Third Party Plan • 1 Year</p>
